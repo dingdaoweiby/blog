@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:fragment="head(title)">
+    <meta charset="UTF-8"/>
+
+    <!--移动端的预览设置-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--replace :change the whole element-->
+    <title th:replace="${title}">admin fragments title name</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.3.3/dist/semantic.min.css">
+    <link rel="stylesheet" href="../../static/css/typo.css" th:href="@{/css/typo.css}">
+    <link rel="stylesheet" href="../../static/css/animate.css" th:href="@{/css/animate.css}">
+    <link rel="stylesheet" href="../../static/css/me.css" th:href="@{/css/me.css}">
+    <link rel="stylesheet" href="../../static/lib/tocbot/tocbot.css" th:href="@{/lib/tocbot/tocbot.css}">
+    <link rel="stylesheet" href="../../static/lib/prism/prism.css" th:href="@{/lib/prism/prism.css}">
+</head>
+<body>
+<!--pass n as a parameter to decide which item is active on nav-->
+
+<nav th:fragment="menu(n)" class="ui inverted segment attached m-padded-tb-mini m-shadow-small">
+    <!--container makes it responsive max width based on size of user's screen-->
+    <div class="ui container">
+        <!--secondary 效果上灰了一点-->
+        <div class="ui inverted secondary stackable menu">
+            <!--item 使tag成为menu的一个子件 以竖线分割,teal 颜色 secondary -->
+            <h2 class="ui header teal item ">管理后台</h2>
+            <!--m-item just for jquery selector-->
+            <a href="#" th:href="@{/admin/blogs}" class="m-item item m-mobile-hide" th:classappend="${n==1} ? 'active'"> <i class="home small icon"></i>博客</a>
+            <a href="#" th:href="@{/admin/types}" class="m-item item m-mobile-hide" th:classappend="${n==2} ? 'active'"> <i class="idea icon"></i>分类</a>
+            <!--<a href="#" th:href="@{/admin/tags}"  class="m-item item m-mobile-hide" th:classappend="${n==3} ? 'active'"> <i class="tags small icon"></i>标签</a>-->
+            <div class="right m-item m-mobile-hide menu">
+                <div class="ui item dropdown">
+                    <div class="text">
+                        <!--<img src="../../static/images/IMG-xiong.JPG" th:src="@{/images/IMG-xiong.JPG}" alt="" class="ui avatar image">-->
+                        <img src="../../static/images/IMG-xiong.JPG" th:src="@{${session.user.avatar}}" alt="" class="ui avatar image">
+                        <span th:text="${session.user.nickname}"></span>
+                    </div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a href="#" th:href="@{/admin/logout}" class="item">注销</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="" class="ui icon menu toggle black button m-top-right m-mobile-show">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+
+
+<footer th:fragment="footer" class="ui inverted segment m-padded-tb-massive">
+    <div class="ui container center aligned ">
+        <!--div.ui.grid,默认共16份-->
+        <div class="ui inverted divided stackable grid">
+            <div class="three wide column">
+                <div class="ui inverted link list">
+                    <div class="item">
+                        <img src="../../static/images/IMG-xiong.JPG" th:src="@{${session.user.avatar}}" alt="wechat img" class="ui rounded image" style="width:110px">
+                    </div>
+                </div>
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header m-text-thin m-text-spaced">最新博客</h4>
+                <!--link list 竖着的-->
+                <div class="ui inverted link list">
+                    <a href="#" class="item">用户故事</a>
+                    <a href="#" class="item">关于刻苦学习的清单</a>
+                    <a href="#" class="item">失败要趁早</a>
+                </div>
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header m-text-thin m-text-spaced ">联系我</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">Email: xx64@njit.edu</a>
+                    <a href="#" class="item">QQ:419799016@qq.com</a>
+                </div>
+            </div>
+            <div class="seven wide column">
+                <h4 class="ui inverted header m-text-thin m-text-spaced">标题</h4>
+                <p class="m-text-thin m-text-spaced m-opacity-mini">段落内容</p>
+            </div>
+        </div>
+        <!--分割线-->
+        <div class="ui inverted section divider"></div>
+        <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright &copy 2018 Designed by Kyle Xiong</p>
+    </div>
+</footer>
+
+<th:block th:fragment="script">
+    <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.3.3/dist/semantic.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>
+
+    <script src="../../static/lib/prism/prism.js" th:src="@{/lib/prism/prism.js}"></script>
+    <script src="../../static/lib/tocbot/tocbot.min.js" th:src="@{/lib/tocbot/tocbot.min.js}"></script>
+    <script src="../../static/lib/qrcode/qrcode.min.js" th:src="@{/lib/qrcode/qrcode.min.js}"></script>
+    <script src="../../static/lib/waypoints/jquery.waypoints.min.js" th:src="@{/lib/waypoints/jquery.waypoints.min.js}"></script>
+</th:block>
+
+
+</body>
+</html>
